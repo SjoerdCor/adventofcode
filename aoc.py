@@ -21,6 +21,7 @@ def string_to_array(string):
 
 
 def string_to_grid(string: str) -> list[list]:
+    """Turn string data into list of lists"""
     return [list(line) for line in string.split("\n")]
 
 
@@ -40,6 +41,11 @@ def read(location, to_grid=False, to_array=False):
     if len(sections) > 1:
         return sections
     return data
+
+
+def to_ints(lst):
+    """Return iterable all converted to int"""
+    return list(map(int, lst))
 
 
 def is_outside_bounds(position: tuple, size) -> bool:
