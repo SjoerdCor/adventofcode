@@ -171,4 +171,4 @@ cython_debug/
 .pypirc
 
 2024/data/*
-20[0-9][0-9]/data[0-9]*.txt
+20[0-9][0-9]/day[0-9]*.txt
