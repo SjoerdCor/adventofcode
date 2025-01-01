@@ -98,3 +98,41 @@ def find_unique_value_coords(arr: np.ndarray, value):
 def display_arr(arr):
     """Display array for visual investigation"""
     print("\n".join("".join(row) for row in arr))
+
+
+def find_first_true(func, options, low=None, high=None):
+    """Finds the first option where func evaluates to True, performing binary search
+
+    Parameters
+    ----------
+    func : callable
+        Will be called with the option selected from options. func(options[0]) must be True,
+        func(options[-1]) must be False
+    options : Iterable
+        A subscriptable iterable of options for which the lowest must be found where func evaluates to True
+        It must be sorted in a way that before a certain index, func always evaluates to False, and afterwards always to True
+    low : the highest known index for which func(option[index]) evaluates to False
+    high : the lowest known index for which func(option[index]) evaluates to True
+
+    Returns
+    -------
+    The first index for which func(options[index]) returns True
+
+    """
+    if low is None:
+        if func(options[0]):
+            return 0
+        return find_first_true(func, options, 0, high)
+    if high is None:
+        high = len(options)
+        if func(options[-1]):
+            return find_first_true(func, options, low, high)
+        raise RuntimeError("No True option found")
+
+    if low == (high - 1):
+        return high  # low is always False, high is always True
+
+    mid = (low + high) // 2
+    if func(options[mid]):
+        return find_first_true(func, options, low, mid)
+    return find_first_true(func, options, mid, high)
