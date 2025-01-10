@@ -136,3 +136,9 @@ def find_first_true(func, options, low=None, high=None):
     if func(options[mid]):
         return find_first_true(func, options, low, mid)
     return find_first_true(func, options, mid, high)
+
+
+def test(output, expected):
+    """Run a simple test, raise ValueError if failed"""
+    if output != expected:
+        raise ValueError(f"Failed test! {expected=}, {output=}")
